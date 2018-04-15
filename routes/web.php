@@ -14,10 +14,13 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('posts','Postscontroller@index')->name('posts.index');
-Route::get('posts/show/{id}', 'Postscontroller@show')->name('posts.show');
-Route::get('posts/create','Postscontroller@create')->name('posts.create');
-Route::post('posts','Postscontroller@store')->name('posts.store');
-Route::get('/posts/edit/{id}', 'Postscontroller@edit')->name('posts.edit');
-Route::post('/posts/update/{id}', 'Postscontroller@update')->name('posts.update');
-Route::get('/posts/delete/{id}', 'Postscontroller@destroy')->name('posts.delete');
+Route::get('posts','Postscontroller@index')->name('posts.index')->middleware('auth');;
+Route::get('posts/show/{id}', 'Postscontroller@show')->name('posts.show')->middleware('auth');;
+Route::get('posts/create','Postscontroller@create')->name('posts.create')->middleware('auth');;
+Route::post('posts','Postscontroller@store')->name('posts.store')->middleware('auth');;
+Route::get('/posts/edit/{id}', 'Postscontroller@edit')->name('posts.edit')->middleware('auth');;
+Route::post('/posts/update/{id}', 'Postscontroller@update')->name('posts.update')->middleware('auth');;
+Route::get('/posts/delete/{id}', 'Postscontroller@destroy')->name('posts.delete')->middleware('auth');;
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

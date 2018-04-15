@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\storePostRequest;
+use Illuminate\Support\Facades\DB;
 use App\Post;
 use App\User;
-use DB;
+
+
 class Postscontroller extends Controller
 {
     public function index(){
-     $posts=Post::all();
+     $posts=Post::paginate(1);
      return view('posts.index',[
          'posts'=>$posts
          ]);
@@ -20,7 +23,7 @@ class Postscontroller extends Controller
            'users'=>$users
         ]);
     }
-    public function store(Request $request){
+    public function store(storePostRequest $request){
         Post::create([
           'title'=>$request->title,
           'description'=>$request->description,
@@ -42,12 +45,12 @@ class Postscontroller extends Controller
             'users'=>$users
         ]);
     }
-    public function update(Request $request,$id){
+    public function update(storePostRequest $request,$id){
         //$data=$request->all();
         Post::where('id',$id)->update([
           'title'=>$request->title,
           'description'=>$request->description,
-          
+          'user_id'=>$request->user_id
 
         ]);
       

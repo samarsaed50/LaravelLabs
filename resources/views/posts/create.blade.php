@@ -1,11 +1,20 @@
-@extends('layouts.master')
+@extends('layouts.app')
 @section('content')
+@if($errors->any())
+<div class="alert alert-danger">
+<ul>
+@foreach($errors->all() as $error)
+<li>{{$error}}</li>
+</ul>
+@endforeach
+</div>
+@endif
 <form method="post" action="{{route('posts.store')}}">
 {{csrf_field()}}
-Title :- <input type="text" name="title">
+Title :- <input type="text" name="title" value="{{old('title')}}">
 <br><br>
 Description :- 
-<textarea name="description"></textarea>
+<textarea name="description"> {{old('description')}}</textarea>
 <br>
 <br>
 Post Creator

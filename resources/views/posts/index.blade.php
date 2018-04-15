@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 @section('content')
 <div class="row">
 <div class="row">
@@ -17,6 +17,7 @@
                     <!-- Table Headings -->
                     <thead>
                         <th width="25%">Title</th>
+                        <th width="15%">slug</th>                        
                         <th width="40%">Posted by</th>
                         <th width="15%">Created At</th>
                         <th width="20%">Action</th>
@@ -27,6 +28,11 @@
                     <td class="table-text"> 
                     <div>
                     {{$post->title}}
+                    </div>
+                    </td>
+                    <td class="table-text"> 
+                    <div>
+                    {{$post->slug}}
                     </div>
                     </td>
                     <td class="table-text"> 
@@ -51,5 +57,8 @@
     </div>
     </div>
 </div>
+</div>
+<div class="panel-heading" style="display:flex; justify-content:center;align-items:center;">
+{{$posts->links()}}
 </div>
 @endsection
